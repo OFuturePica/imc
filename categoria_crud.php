@@ -95,6 +95,9 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 
                 print json_encode(1);
             } catch (Exception $e) {
+                foreach ($_SESSION["erros"] as $chave => $valor) {
+                    $errosAux .= $valor . "<br>";
+                
                 echo "Erro: " . $e->getMessage() . "<br>";
             } finally {
                 $conexao = null;
@@ -125,65 +128,4 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     }
 }
 
-//consulta sem ajax
-function buscarCategoria(int $id)
-{
-    try {
-        $sql = "select * from medidas where id = ?";
-        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
-        $pre = $conexao->prepare($sql);
-        $pre->execute(array(
-            $id
-        ));
 
-        return $pre->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage() . "<br>";
-    } finally {
-        $conexao = null;
-    }
-}
-
-//consulta sem ajax
-function listarCategoria()
-{
-    try {
-        $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
-
-        $sql = "select * from medidas where usuario_id = ? order by peso";
-        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
-        $pre = $conexao->prepare($sql);
-        $pre->execute(array(
-            $usuario_id
-        ));
-        $pre->execute();
-
-        return $pre->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage() . "<br>";
-    } finally {
-        $conexao = null;
-    }
-}
-
-//consulta sem ajax
-function listarCategoriaEntrada()
-{
-    try {
-        $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
-
-        $sql = "select * from medidas where usuario_id = ? and tipo = 1 order by peso";
-        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
-        $pre = $conexao->prepare($sql);
-        $pre->execute(array(
-            $usuario_id
-        ));
-        $pre->execute();
-
-        return $pre->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage() . "<br>";
-    } finally {
-        $conexao = null;
-    }
-}

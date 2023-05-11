@@ -63,7 +63,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     <header id="topo">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">TDS WEB 2</a>
+                <a class="navbar-brand" href="index.php">IMC-MASTER</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
