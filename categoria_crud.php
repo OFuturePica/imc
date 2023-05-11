@@ -95,8 +95,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 
                 print json_encode(1);
             } catch (Exception $e) {
-                foreach ($_SESSION["erros"] as $chave => $valor) {
-                    $errosAux .= $valor . "<br>";
+            
                 
                 echo "Erro: " . $e->getMessage() . "<br>";
             } finally {
@@ -108,7 +107,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = new stdClass();
                 $registro = json_decode($_POST["registro"]);
 
-                $sql = "select * from medidas where id = ?";
+                $sql = "select * from medidas where (id like)";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
@@ -128,4 +127,41 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     }
 }
 
+function listarCategoria()
+{
+    try {
+        $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
+
+           $sql = "select * from medidas where usuario_id = ? order by peso";
+        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+        $pre = $conexao->prepare($sql);
+        $pre->execute(array(
+            $usuario_id
+        ));
+        $pre->execute();
+
+        return $pre->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage() . "<br>";
+    } finally {
+        $conexao = null;
+    }
+}
+function buscarCategoria(int $id)
+{
+    try {
+        $sql = "select * from medidas where id = ?";
+        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+        $pre = $conexao->prepare($sql);
+        $pre->execute(array(
+            $id
+        ));
+
+        return $pre->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage() . "<br>";
+    } finally {
+        $conexao = null;
+    }
+}
 

@@ -1,3 +1,4 @@
+ 
 <?php
 require_once("./fpdf184/fpdf.php");
 require_once("categoria_crud.php");
@@ -67,4 +68,3 @@ $pdf->SetFont("Arial", "", 12);
 $pdf->AddPage();
 $pdf->listagem();
 $pdf->Output();
-
