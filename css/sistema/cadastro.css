@@ -1,0 +1,17 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	align-items: center;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background-color: #ffffff;
+}
+
+.form-cadastro {
+	width: 100%;
+	max-width: 450px;
+	padding: 15px;
+	margin: auto;
+}
