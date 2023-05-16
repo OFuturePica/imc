@@ -33,11 +33,19 @@ require_once("valida_acesso.php");
   <div class="l-navbar" id="nav-bar">
     <nav class="navmenu">
       <div>
-        <a class="nav_logo" title="Home" id="home_link"> <i class="fas fa-home nav_logo-icon"></i> <span class="nav_logo-name">imc-master</span>
+        <a class="nav_logo" title="Home" id="home_link"> 
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+         </svg> 
+         <span class="nav_logo-name">imc-master</span>
         </a>
         <div class="nav_list">
           <a href="#" class="nav_link" title="Categoria" id="categoria_link">
-            <i class="fas fa-tag nav_icon"></i> <span class="nav_name">Categoria</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-pulse-fill" viewBox="0 0 16 16">
+            <path d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475Z"/>
+           <path d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z"/>
+           </svg> 
+          <span class="nav_name">medidas</span>
           </a>
           <a class="nav_link" title="Usuário" id="usuario_link">
             <i class="fas fa-user-cog nav_icon"></i>

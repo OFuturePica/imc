@@ -14,7 +14,7 @@ class CategoriaPDF extends FPDF
         $this->Cell(80);
 
         // Title
-        $this->Cell(30, 10, 'Listagem de Categorias', 0, 0, 'C');
+        $this->Cell(30, 10, 'Listagem de medidas', 0, 0, 'C');
 
         // Linha
         $this->Line(0, 20, $this->GetPageWidth(), 20);
