@@ -58,15 +58,14 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 validaDados($registro);
 
 
-             $sql = "update medidas set peso = ?, altura = ?, data = ? WHERE id = ?";
-;
+            $sql = "update medidas set(peso, altura, data, usuario_id) VALUES (?, ?, ?, ?) ";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
                     $registro->peso_categoria,
                     $registro->altura_categoria,
                     $registro->data_categoria,
-                    $registro->id_categoria
+                    $registro->id_medidas
                 ));
                 print json_encode(1);
             } catch (Exception $e) {
@@ -121,11 +120,82 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $conexao = null;
             }
             break;
+             case 'grafico':
+            try {
+                $ano = filter_var($_POST["ano"], FILTER_VALIDATE_INT);
+                $usuario_id = filter_var($_POST["usuario"], FILTER_VALIDATE_INT);
+                $receber = null;
+                $receber_aux = [];
+                $linhas = [];
+                $retorno = [];
+
+                $meses = [
+                    1 => 'Janeiro',
+                    2 => 'Fevereiro',
+                    3 => 'Março',
+                    4 => 'Abril',
+                    5 => 'Maio',
+                    6 => 'Junho',
+                    7 => 'Julho',
+                    8 => 'Agosto',
+                    9 => 'Setembro',
+                    10 => 'Outubro',
+                    11 => 'Novembro',
+                    12 => 'Dezembro'
+                ];
+
+                $sql = "select extract(month from data_vencimento) as mes, sum(valor) as valor " . "from conta_receber where usuario_id = ? " .
+                    "and extract(year from data_vencimento) = ? " .
+                    "group by mes order by mes";
+
+                $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                $pre = $conexao->prepare($sql);
+                $pre->execute(array(
+                    $usuario_id,
+                    $ano
+                ));
+
+                $receber = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                // aqui extraindo os dados de recebimentos da consulta
+                for ($i = 0; $i < count($receber); $i++) {
+                    $linha = $receber[$i];
+
+                    if (array_key_exists($linha["mes"], $meses)) {
+                        $linhas[$meses[$linha["mes"]]] = $linha["valor"];
+                    }
+                }
+
+                // só preenchendo o vetor com os dados restantes se não vier 12 meses na consulta
+                if (count($linhas) < 12) {
+                    for ($i = 1; $i < 13; $i++) {
+                        if (array_key_exists($meses[$i], $linhas)) {
+                            $receber_aux[$meses[$i]] = $linhas[$meses[$i]];
+                        } else {
+                            $receber_aux[$meses[$i]] = 0;
+                        }
+                    }
+                }
+
+
+                $retorno[] = $receber_aux;
+                print json_encode($retorno);
+            } catch (Exception $e) {
+                echo "Erro: " . $e->getMessage() . "<br>";
+            } finally {
+                $conexao = null;
+            }
+            break;
         default:
             print json_encode(0);
             return;
     }
-}
+
+        default:
+            print json_encode(0);
+            return;
+    }
+
 
 function listarCategoria()
 {
