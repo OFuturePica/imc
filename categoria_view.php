@@ -81,7 +81,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                            
                             <br>
                             <dl>
-                                <dt>Data</dt>
+                                <dt>Data de medida</dt>
                                 <dd>
                                     <?= isset($resultado["data"]) ? $resultado["data"] : ""; ?>
                                 </dd>

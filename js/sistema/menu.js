@@ -1,104 +1,126 @@
-//para funcionar navegação via ajax os ids devem ser únicos em cada tela
-$(document).ready(function () {
-    //clicar no botão da div de erros e escondendo as mensagens de erros
-    $("#div_mensagem_botao_menu").click(function () {
-        $("#div_mensagem_menu").hide();
-    });
+$(document).ready(function() {
+  // Clicar no botão da div de erros e escondendo as mensagens de erros
+  $("#div_mensagem_botao_menu").click(function() {
+    $("#div_mensagem_menu").hide();
+  });
 
-    $('#botao_pesquisar_grafico').click(function (e) {
-        var ano = $("#ano").val();
-        var id_usuario = $("#usuario_id_menu").val();
+  $('#botao_pesquisar_grafico').click(function(e) {
+    var ano = $("#ano").val();
+    var id_usuario = $("#usuario_id_menu").val();
 
-        //regerando o canvas para não ter erro no gráfico
-        $("#div_grafico").html("");
-        $("#div_grafico").append("<canvas id='grafico'></canvas>");
+    // Regenerando o canvas para não ter erro no gráfico
+    $("#div_grafico").html("");
+    $("#div_grafico").append("<canvas id='grafico'></canvas>");
 
-        $.ajax({
-            type: "POST",
-            cache: false,
-            url: "conta_receber_crud.php",
-            data: {
-                acao: "grafico",
-                ano: ano,
-                usuario: id_usuario
+    $.ajax({
+      type: "POST",
+      cache: false,
+      url: "categoria_crud.php",
+      data: {
+        acao: "grafico",
+        ano: ano,
+        usuario: id_usuario
+      },
+      dataType: "json",
+      success: function(data) {
+        var medidas = [];
+        var datas = [];
+        var pesos = [];
+        var alturas = [];
+        var imcs = [];
+
+        $.each(data, function(i, item) {
+          if (i == 0) {
+            medidas = item;
+          }
+        });
+
+        $.each(medidas, function(i, item) {
+          datas.push(item.data);
+          pesos.push(item.peso);
+          alturas.push(item.altura);
+          var imc = item.peso / (item.altura * item.altura);
+          imcs.push(imc.toFixed(2));
+        });
+
+        var dados = {
+          labels: datas,
+          datasets: [
+            {
+              label: "Peso",
+              backgroundColor: "#4080bf",
+              borderColor: "#3973ac",
+              hoverBackgroundColor: "#ccccff",
+              hoverBorderColor: "#b3b3ff",
+              borderWidth: 1,
+              data: pesos
             },
-            dataType: "json",
-            success: function (data) {
-                var receber = [];
-                var receber_meses = [];
-                var receber_valores = [];
-                var receber_meses = [];
-                var receber_valores = [];
-
-                $.each(data, function (i, item) {
-                    if (i == 0) {
-                        receber = item;
-                    }
-                });
-
-                $.each(receber, function (i, item) {
-                    receber_meses.push(i);
-                    receber_valores.push(item);
-                });
-
-                var dados = {
-                    labels: receber_meses,
-                    datasets: [{
-                        label: "Contas a Receber",
-                        backgroundColor: "#4080bf",
-                        borderColor: "#3973ac",
-                        hoverBackgroundColor: "#ccccff",
-                        hoverBorderColor: "#b3b3ff",
-                        borderWidth: 1,
-                        data: receber_valores
-                    }]
-                };
-                var grafico_canva = $("#grafico");
-
-                var graficoBarra = new Chart(
-                    grafico_canva, {
-                        type: "bar",
-                        data: dados,
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    position: "top",
-                                },
-                                title: {
-                                    display: true,
-                                    text: "Contas a Receber - " + ano
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    display: true,
-                                    title: {
-                                        display: true,
-                                        text: "Valores R$",
-                                        color: "#000000",
-                                        font: {
-                                            weight: "bold",
-                                        }
-                                    }
-                                },
-                                x: {
-                                    display: true,
-                                    title: {
-                                        display: true,
-                                        text: "Meses do ano",
-                                        color: "#000000",
-                                        font: {
-                                            weight: "bold",
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                );
+            {
+              label: "Altura",
+              backgroundColor: "#ff9933",
+              borderColor: "#e68a00",
+              hoverBackgroundColor: "#ffcc99",
+              hoverBorderColor: "#ff9933",
+              borderWidth: 1,
+              data: alturas
             },
+            {
+              label: "IMC",
+              backgroundColor: "#99ccff",
+              borderColor: "#6699cc",
+              hoverBackgroundColor: "#cce6ff",
+              hoverBorderColor: "#99ccff",
+              borderWidth: 1,
+              data: imcs
+            }
+          ]
+        };
+
+        var grafico_canva = $("#grafico");
+        var graficoBarra = new Chart(grafico_canva, {
+          type: "bar",
+          data: dados,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "top"
+              },
+              title: {
+                display: true,
+                text: "Medidas de Peso, Altura e IMC - " + ano
+              }
+            },
+            scales: {
+              y: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Valor",
+                  color: "#000000",
+                  font: {
+                    weight: "bold"
+                  }
+                }
+              },
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Data de Medida",
+                  color: "#000000",
+                  font: {
+                    weight: "bold"
+                  }
+                }
+              }
+            }
+          }
+        });
+      },
+      // Resto do código...
+
             error: function (e) {
                 $("#div_mensagem_texto_menu").empty().append(e.responseText);
                 $("#div_mensagem_menu").show();

@@ -124,6 +124,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
         default:
             print json_encode(0);
             return;
+            
     }
 }
 

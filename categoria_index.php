@@ -161,7 +161,7 @@ try {
                                     <td><?php echo $medidas["id"]; ?></td>
                                     <td><?php echo $medidas["peso"]; ?></td>
                                     <td><?php echo $medidas["altura"]; ?></td>
-                                    <td><?php echo $medidas["data"]; ?></td>
+                                    <td><?php echo  date("d/m/y", strtotime($medidas["data"])); ?></td>
                                     <td>
                                         <a id="botao_view_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
                                         <a id="botao_editar_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>

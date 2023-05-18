@@ -25,7 +25,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-start">
-                    <h4>Adicionar Categoria</h4>
+                    <h4>Adicionar Medidas</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                 </div>
@@ -76,7 +76,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                                 <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50" autofocus>
                             </div>
                             <div class="col-md-6">
-                                <label for="data_C" class="form-label">peso</label>
+                                <label for="data_C" class="form-label">Data de medida</label>
                                 <input type="date" class="form-control" id="data_categoria" name="data_categoria" maxlength="50" autofocus>
                             </div>
                    

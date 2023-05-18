@@ -40,7 +40,7 @@ class CategoriaPDF extends FPDF
     function listagem()
     {
         try {
-            $cabecalho = ["ID", "Peso", "Altura", "Data"];
+            $cabecalho = ["ID", "Peso", "Altura", "Data de Medidas"];
             $dados = listarCategoria();
 
             // Cabeçalho
