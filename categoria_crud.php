@@ -58,7 +58,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 validaDados($registro);
 
 
-            $sql = "update medidas set(peso, altura, data, usuario_id) VALUES (?, ?, ?, ?) ";
+            $sql = "update medidas SET peso = ?, altura = ?, data = ?, usuario_id = ? WHERE id = ?";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
