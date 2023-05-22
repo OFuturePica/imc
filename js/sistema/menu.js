@@ -46,24 +46,7 @@ $(document).ready(function() {
         var dados = {
           labels: datas,
           datasets: [
-            {
-              label: "Peso",
-              backgroundColor: "#4080bf",
-              borderColor: "#3973ac",
-              hoverBackgroundColor: "#ccccff",
-              hoverBorderColor: "#b3b3ff",
-              borderWidth: 1,
-              data: pesos
-            },
-            {
-              label: "Altura",
-              backgroundColor: "#ff9933",
-              borderColor: "#e68a00",
-              hoverBackgroundColor: "#ffcc99",
-              hoverBorderColor: "#ff9933",
-              borderWidth: 1,
-              data: alturas
-            },
+
             {
               label: "IMC",
               backgroundColor: "#99ccff",
@@ -97,7 +80,7 @@ $(document).ready(function() {
                 display: true,
                 title: {
                   display: true,
-                  text: "Valor",
+                  text: "imc",
                   color: "#000000",
                   font: {
                     weight: "bold"

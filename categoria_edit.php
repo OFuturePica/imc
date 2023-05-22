@@ -8,7 +8,8 @@ require_once("categoria_crud.php");
 if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     try {
         $erros = [];
-        $id = filter_input(INPUT_POST, "id_categoria", FILTER_VALIDATE_INT);
+        $id = filter_input(INPUT_POST, "id_medidas", FILTER_VALIDATE_INT);
+        $usuario_id = isset($_SESSION["usuario_id"]) ?  $_SESSION["usuario_id"] : 0;
         $pagina = filter_input(INPUT_POST, "pagina_categoria", FILTER_VALIDATE_INT);
         $texto_busca = filter_input(INPUT_POST, "texto_busca_categoria", FILTER_SANITIZE_STRING);
 
@@ -48,7 +49,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_categoria"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
-                            <li class="breadcrumb-item"><a href="#" title="Categoria" id="categoria_index"><i class="fas fas fa-tag"></i> <span>Categoria</span></a></li>
+                            <li class="breadcrumb-item"><a href="#" title="Categoria" id="categoria_index"><i class="fas fa-plus fa-beat "></i> <span>Medidas</span></a></li>
                             <li class="breadcrumb-item active" aria-current="page">Editar</li>
                         </ol>
                     </nav>
@@ -96,7 +97,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 
 
                          
-                            <input type="hidden" id="id_medida" name="id_medida" value="<?php echo isset($id) ? $id : '' ?>" />
+                            <input type="hidden" id="id_medidas" name="id_medidas" value="<?php echo isset($id) ? $id : '' ?>" />
                              <input type="hidden" id="usuario_id_medida" name="usuario_id_medida" value="<?php echo isset($usuario_id) ? $usuario_id : '' ?>" />
                         </div>
                     </div>

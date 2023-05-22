@@ -34,7 +34,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_categoria"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
-                            <li class="breadcrumb-item"><a href="#" title="Categoria" id="categoria_index"><i class="fas fa-tag"></i> <span>Categoria</span></a></li>
+                            <li class="breadcrumb-item"><a href="#" title="Categoria" id="categoria_index"><i class="fas fa-plus fa-beat "></i><span>Medidas</span></a></li>
                             <li class="breadcrumb-item active" aria-current="page">Adicionar</li>
                         </ol>
                     </nav>
@@ -73,11 +73,11 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             </div>
                             <div class="col-md-6">
                                 <label for="altura" class="form-label">altura</label>
-                                <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50" autofocus>
+                                <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50">
                             </div>
                             <div class="col-md-6">
                                 <label for="data_C" class="form-label">Data de medida</label>
-                                <input type="date" class="form-control" id="data_categoria" name="data_categoria" maxlength="50" autofocus>
+                                <input type="date" class="form-control" id="data_categoria" name="data_categoria" maxlength="50" >
                             </div>
                    
                             <input type="hidden" id="id_medida" value="<?php echo isset($id) ? $id : '' ?>" />

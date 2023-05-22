@@ -59,6 +59,30 @@ $(document).ready(function () {
 			}
 		}
 	});
+		/*$("#altura_categoria").inputmask("currency", {
+		autoUnmask: true,
+		radixPoint: ",",
+		groupSeparator: ".",
+		allowMinus: false,
+		prefix: 'M ',
+		digits: 2,
+		digitsOptional: false,
+		rightAlign: true,
+		unmaskAsNumber: false
+	});
+		$("#peso_categoria").inputmask("currency", {
+		autoUnmask: true,
+		radixPoint: ",",
+		groupSeparator: ".",
+		allowMinus: false,
+		prefix: 'Kg ',
+		digits: 2,
+		digitsOptional: false,
+		rightAlign: true,
+		unmaskAsNumber: false
+	});*/
+
+
 
 	//clicar no botão da div de erros e escondendo as mensagens de erros de validação da listagem
 	$("#div_mensagem_botao_categoria").click(function () {
@@ -229,7 +253,7 @@ $(document).ready(function () {
 				cache: false,
 				url: "categoria_edit.php",
 				data: {
-					id_categoria: id,
+					id_medidas: id,
 					pagina_categoria: pagina,
 					texto_busca_categoria: texto_busca
 				},

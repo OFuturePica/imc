@@ -34,7 +34,7 @@ try {
     $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
 
     //Sql para ser consultada
-    $sql = "select * from medidas where (id like :palavra or peso like  :palavra OR altura LIKE :palavra OR data LIKE :palavra) and usuario_id = :id order by id asc ";
+    $sql = "select * from medidas where (id like :palavra or peso like :palavra) and usuario_id = :id order by id asc ";
 
 
     // Prepara a consulta para a paginação
@@ -85,7 +85,7 @@ try {
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-start">
-                    <h4>Lista de Categorias</h4>
+                    <h4>Lista de medidas</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                 </div>
@@ -94,7 +94,7 @@ try {
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_categoria"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Categoria</li>
+                            <li class="breadcrumb-item active" aria-current="page">Medidas</li>
                         </ol>
                     </nav>
                 </div>
