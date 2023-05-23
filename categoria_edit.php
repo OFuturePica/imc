@@ -8,8 +8,8 @@ require_once("categoria_crud.php");
 if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     try {
         $erros = [];
-        $id = filter_input(INPUT_POST, "id_medidas", FILTER_VALIDATE_INT);
-        $usuario_id = isset($_SESSION["usuario_id"]) ?  $_SESSION["usuario_id"] : 0;
+        $id = filter_input(INPUT_POST, "id_medida", FILTER_VALIDATE_INT);
+          $usuario_id = isset($_SESSION["usuario_id"]) ?  $_SESSION["usuario_id"] : 0;
         $pagina = filter_input(INPUT_POST, "pagina_categoria", FILTER_VALIDATE_INT);
         $texto_busca = filter_input(INPUT_POST, "texto_busca_categoria", FILTER_SANITIZE_STRING);
 
@@ -96,9 +96,8 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             </div>
 
 
-                         
-                            <input type="hidden" id="id_medidas" name="id_medidas" value="<?php echo isset($id) ? $id : '' ?>" />
-                             <input type="hidden" id="usuario_id_medida" name="usuario_id_medida" value="<?php echo isset($usuario_id) ? $usuario_id : '' ?>" />
+                          <input type="hidden" id="id_medida" name="id_medida" value="<?php echo isset($id) ? $id : '' ?>" />
+                          <input type="hidden" id="usuario_id_medida" name="usuario_id_medida" value="<?php echo isset($usuario_id) ? $usuario_id : '' ?>" />
                         </div>
                     </div>
                     <br>
@@ -115,6 +114,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
         </div>
     </div>
 </div>
+
 <!--modal de salvar-->
 <div class="modal fade" id="modal_salvar_categoria" tabindex="-1" aria-labelledby="logoutlabel" aria-hidden="true">
     <div class="modal-dialog">

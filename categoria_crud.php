@@ -58,17 +58,18 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 validaDados($registro);
                 //var_dump($registro);
 //update medidas set peso = 11, altura = 11, data = 02 WHERE id = 11 and usuario_id =2 ;
-            $sql = "update medidas set peso = ?, altura = ?, data = ? WHERE id = ? and usuario_id = ?";
+            $sql = "update medidas set peso = ?, altura = ?, data = ? WHERE id = ? and usuario_id = ? ";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
                     $registro->peso_categoria,
                     $registro->altura_categoria,
                     $registro->data_categoria,
-                    $registro->id_medidas,
+                    $registro->id_medida,
                     $registro->usuario_id_medida
+                  
                 ));
-                
+               
                 print json_encode(1);
             } catch (Exception $e) {
                 foreach ($_SESSION["erros"] as $chave => $valor) {

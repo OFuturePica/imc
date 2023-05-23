@@ -140,7 +140,7 @@ $(document).ready(function () {
 
 		$("#carregando_categoria").removeClass("d-none");
 
-		if ($.trim($("#id_categoria").val()) != "") {
+		if ($.trim($("#id_medida").val()) != "") {
 			operacao = "editar";
 		} else {
 			operacao = "adicionar";
@@ -253,7 +253,7 @@ $(document).ready(function () {
 				cache: false,
 				url: "categoria_edit.php",
 				data: {
-					id_medidas: id,
+					id_medida: id,
 					pagina_categoria: pagina,
 					texto_busca_categoria: texto_busca
 				},
