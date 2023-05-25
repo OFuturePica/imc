@@ -148,7 +148,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                     12 => 'Dezembro'
                 ];
 
-                $sql = "select extract(month from data) as mes, sum(peso) as valor " . "from medidas where usuario_id = ? " .
+                $sql = "select extract(month from data) as mes, sum(peso / (altura * altura)) as valor " . "from medidas where usuario_id = ? " .
                     "and extract(year from data) = ? " .
                     "group by mes order by mes";
 
