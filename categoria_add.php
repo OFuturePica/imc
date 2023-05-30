@@ -69,11 +69,11 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         <div class="tab-pane fade show active" id="dados_categoria" role="tabpanel" aria-labelledby="dados_categoria">
                             <div class="col-md-6">
                                 <label for="peso" class="form-label">peso</label>
-                                <input type="text" class="form-control" id="peso_categoria" name="peso_categoria" maxlength="50" autofocus>
+                                <input type="text" class="form-control" id="peso_categoria" name="peso_categoria" maxlength="50"  >
                             </div>
                             <div class="col-md-6">
                                 <label for="altura" class="form-label">altura</label>
-                                <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50">
+                                <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50" >
                             </div>
                             <div class="col-md-6">
                                 <label for="data_C" class="form-label">Data de medida</label>

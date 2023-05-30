@@ -84,15 +84,15 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         <div class="tab-pane fade show active" id="dados_categoria" role="tabpanel" aria-labelledby="dados_categoria">
                             <div class="col-md-6">
                                     <label for="peso_categoria" class="form-label">peso</label>
-                                <input type="text" class="form-control" id="peso_categoria" name="peso_categoria" maxlength="50" value="<?php echo isset($resultado['peso']) ? $resultado['peso'] : ''; ?>" autofocus>
+                                <input type="text" class="form-control" id="peso_categoria" name="peso_categoria" maxlength="50" value="<?php echo isset($resultado['peso']) ?  str_replace(".", ",", $resultado["peso"]) : ''; ?> " autofocus>
                             </div>
                             <div class="col-md-6">
                                 <label for="altura_categoria" class="form-label">altura</label>
-                                <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50" value="<?php echo isset($resultado['altura']) ? $resultado['altura'] : ''; ?>" autofocus>
+                                <input type="text" class="form-control" id="altura_categoria" name="altura_categoria" maxlength="50" value="<?php echo isset($resultado['altura']) ?  str_replace(".", ",", $resultado["altura"]) : ''; ?>" autofocus>
                             </div>
                             <div class="col-md-6">
                                 <label for="datac_categoria" class="form-label">data</label>
-                                <input type="date" class="form-control" id="data_categoria" name="data_categoria" maxlength="50" value="<?php echo isset($resultado['data']) ? $resultado['data'] : ''; ?>" autofocus>
+                                <input type="date" class="form-control" id="data_categoria" name="data_categoria" maxlength="50" value="<?php echo isset($resultado['data']) ? str_replace(".", ",", $resultado["data"]) : ''; ?>" autofocus>
                             </div>
 
 

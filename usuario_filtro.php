@@ -17,8 +17,8 @@ function validaDados($registro)
         $erros["login_usuario"] =  "Login: Campo vazio e ou informação inválida!";
     }
 
-    if (!filter_var($registro->senha_usuario, FILTER_SANITIZE_STRING)) {
-        $erros["senha_usuario"] =  "Senha: Campo vazio e ou informação inválida!";
+    if (!filter_var($registro->nova_senha, FILTER_SANITIZE_STRING)) {
+        $erros["nova_senha"] =  "Senha: Campo vazio e ou informação inválida!";
     }
 
     $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);

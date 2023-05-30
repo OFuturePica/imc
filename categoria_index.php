@@ -159,8 +159,8 @@ try {
                             <?php foreach ($medidas as $medidas) { ?>
                                 <tr id="<?php echo $medidas['id'] . "_medida"; ?>">
                                     <td><?php echo $medidas["id"]; ?></td>
-                                    <td><?php echo $medidas["peso"]; ?></td>
-                                    <td><?php echo $medidas["altura"]; ?></td>
+                                    <td><?php echo number_format($medidas["peso"], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($medidas["altura"], 2, ',', '.'); ?></td>
                                     <td><?php echo  date("d/m/y", strtotime($medidas["data"])); ?></td>
                                     <td>
                                         <a id="botao_view_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>

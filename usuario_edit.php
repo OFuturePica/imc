@@ -99,7 +99,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             </div>
                             <div class="col-md-6">
                                 <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha_usuario" name="senha_usuario" maxlength="10" value="<?php echo isset($resultado['senha']) ? $resultado['senha'] : ''; ?>">
+                                <input type="password" class="form-control" id="nova_senha" name="nova_senha" maxlength="10" value="<?php echo isset($resultado['senha']) ? $resultado['senha'] : ''; ?>">
                             </div>
                             <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo isset($id) ? $id : '' ?>" />
                         </div>

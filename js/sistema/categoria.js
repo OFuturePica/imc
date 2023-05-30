@@ -81,7 +81,28 @@ $(document).ready(function () {
 		rightAlign: true,
 		unmaskAsNumber: false
 	});*/
-
+$("#peso_categoria").inputmask("numeric", {
+	autoUnmask: true,
+    radixPoint: ",",
+    groupSeparator: ".",
+    allowMinus: false,
+    suffix: ' kg',
+    digits: 2,
+    digitsOptional: false,
+    rightAlign: true,
+    unmaskAsNumber: false
+});
+$("#altura_categoria").inputmask("numeric", {
+	autoUnmask: true,
+    radixPoint: ",",
+    groupSeparator: "",
+    allowMinus: false,
+    suffix: ' m',
+    digits: 2,
+    digitsOptional: false,
+    rightAlign: true,
+    unmaskAsNumber: false
+});
 
 
 	//clicar no botão da div de erros e escondendo as mensagens de erros de validação da listagem
