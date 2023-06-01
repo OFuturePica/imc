@@ -85,7 +85,7 @@ try {
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-start">
-                    <h4>Lista de medidas</h4>
+                    <h4>Lista de Medidas</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                 </div>

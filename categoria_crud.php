@@ -123,73 +123,74 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $conexao = null;
             }
             break;
-                  break;
-        case 'grafico':
-            try {
-                $ano = filter_var($_POST["ano"], FILTER_VALIDATE_INT);
-                $usuario_id = filter_var($_POST["usuario"], FILTER_VALIDATE_INT);
-                $receber = null;
-                $receber_aux = [];
-                $linhas = [];
-                $retorno = [];
+       case 'grafico':
+    try {
+        $ano = filter_var($_POST["ano"], FILTER_VALIDATE_INT);
+        $usuario_id = filter_var($_POST["usuario"], FILTER_VALIDATE_INT);
+        $receber = null;
+        $receber_aux = [];
+        $linhas = [];
 
-                $meses = [
-                    1 => 'Janeiro',
-                    2 => 'Fevereiro',
-                    3 => 'Março',
-                    4 => 'Abril',
-                    5 => 'Maio',
-                    6 => 'Junho',
-                    7 => 'Julho',
-                    8 => 'Agosto',
-                    9 => 'Setembro',
-                    10 => 'Outubro',
-                    11 => 'Novembro',
-                    12 => 'Dezembro'
-                ];
+        $retorno = [];
 
-                $sql = "select extract(month from data) as mes, sum(peso / (altura * altura)) as valor " . "from medidas where usuario_id = ? " .
-                    "and extract(year from data) = ? " .
-                    "group by mes order by mes";
+        $meses = [
+            1 => 'Janeiro',
+            2 => 'Fevereiro',
+            3 => 'Março',
+            4 => 'Abril',
+            5 => 'Maio',
+            6 => 'Junho',
+            7 => 'Julho',
+            8 => 'Agosto',
+            9 => 'Setembro',
+            10 => 'Outubro',
+            11 => 'Novembro',
+            12 => 'Dezembro'
+        ];
 
-                $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
-                $pre = $conexao->prepare($sql);
-                $pre->execute(array(
-                    $usuario_id,
-                    $ano
-                ));
+        $sql = "select extract(month from data) as mes, peso  as peso,  altura as altura,  truncate((peso / (altura * altura)),2) as valor " . "from medidas where usuario_id = ? " .
+            "and extract(year from data) = ? " .
+            "group by mes order by mes";
 
-                $receber = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+        $pre = $conexao->prepare($sql);
+        $pre->execute(array(
+            $usuario_id,
+            $ano
+        ));
 
-                // aqui extraindo os dados de recebimentos da consulta
-                for ($i = 0; $i < count($receber); $i++) {
-                    $linha = $receber[$i];
+        $receber = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-                    if (array_key_exists($linha["mes"], $meses)) {
-                        $linhas[$meses[$linha["mes"]]] = $linha["valor"];
-                    }
-                }
-
-                // só preenchendo o vetor com os dados restantes se não vier 12 meses na consulta
-                if (count($linhas) < 12) {
-                    for ($i = 1; $i < 13; $i++) {
-                        if (array_key_exists($meses[$i], $linhas)) {
-                            $receber_aux[$meses[$i]] = $linhas[$meses[$i]];
-                        } else {
-                            $receber_aux[$meses[$i]] = 0;
-                        }
-                    }
-                }
-
-
-                $retorno[] = $receber_aux;
-                print json_encode($retorno);
-            } catch (Exception $e) {
-                echo "Erro: " . $e->getMessage() . "<br>";
-            } finally {
-                $conexao = null;
+        // aqui extraindo os dados de recebimentos da consulta
+        for ($i = 0; $i < count($receber); $i++) {
+            $linha = $receber[$i];
+            if (array_key_exists($linha["mes"], $meses)) {
+            $linhas[$meses[$linha["mes"]]] = [[$linha["peso"] , $linha["altura"]]];
+                
             }
-            break;
+        }
+
+        // só preenchendo o vetor com os dados restantes se não vier 12 meses na consulta
+        if (count($linhas) < 12) {
+            for ($i = 1; $i < 13; $i++) {
+                if (array_key_exists($meses[$i], $linhas)) {
+                    $receber_aux[$meses[$i]] = $linhas[$meses[$i]];
+                } else {
+                    $receber_aux[$meses[$i]] = 0;
+                }
+            }
+        }
+
+        $retorno[] = $receber_aux;
+        print json_encode($retorno);
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage() . "<br>";
+    } finally {
+        $conexao = null;
+    }
+
+    break;
+
             
         default:
             print json_encode(0);

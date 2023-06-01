@@ -4,99 +4,120 @@ $(document).ready(function() {
     $("#div_mensagem_menu").hide();
   });
 
-  $('#botao_pesquisar_grafico').click(function (e) {
-        var ano = $("#ano").val();
-        var id_usuario = $("#usuario_id_menu").val();
+ $('#botao_pesquisar_grafico').click(function (e) {
+    var ano = $("#ano").val();
+    var id_usuario = $("#usuario_id_menu").val();
 
-        //regerando o canvas para não ter erro no gráfico
-        $("#div_grafico").html("");
-        $("#div_grafico").append("<canvas id='grafico'></canvas>");
+    //regerando o canvas para não ter erro no gráfico
+    $("#div_grafico").html("");
+    $("#div_grafico").append("<canvas id='grafico'></canvas>");
 
-        $.ajax({
-            type: "POST",
-            cache: false,
-            url: "conta_receber_crud.php",
-            data: {
-                acao: "grafico",
-                ano: ano,
-                usuario: id_usuario
-            },
-            dataType: "json",
-            success: function (data) {
-                var receber = [];
-                var receber_meses = [];
-                var receber_valores = [];
-                var receber_meses = [];
-                var receber_valores = [];
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "categoria_crud.php",
+        data: {
+            acao: "grafico",
+            ano: ano,
+            usuario: id_usuario
+        },
+        dataType: "json",
+        success: function (data) {
+            var receber = [];
+            var receber_meses = [];
+            var receber_pesos = [];
+            var receber_alturas = [];
+            var receber_imcs = [];
 
-                $.each(data, function (i, item) {
-                    if (i == 0) {
-                        receber = item;
-                    }
-                });
+            $.each(data, function (i, item) {
+                if (i == 0) {
+                    receber = item;
+                }
+            });
 
-                $.each(receber, function (i, item) {
-                    receber_meses.push(i);
-                    receber_valores.push(item);
-                });
+            $.each(receber, function (i, item) {
+                receber_meses.push(i);
+                receber_pesos.push(item[0]);
+                receber_alturas.push(item[1]);
+                receber_imcs.push((item[0]/(item[1]*item[1])));
+            });
 
-                var dados = {
-                    labels: receber_meses,
-                    datasets: [{
-                        label: "Contas a Receber",
-                        backgroundColor: "#4080bf",
-                        borderColor: "#3973ac",
-                        hoverBackgroundColor: "#ccccff",
-                        hoverBorderColor: "#b3b3ff",
-                        borderWidth: 1,
-                        data: receber_valores
-                    }]
-                };
-                var grafico_canva = $("#grafico");
+        var dados = {
+                labels: receber_meses,
+                datasets: [{
+                    label: "Peso",
+                    backgroundColor: "#4080bf",
+                    borderColor: "#3973ac",
+                    hoverBackgroundColor: "#ccccff",
+                    hoverBorderColor: "#b3b3ff",
+                    borderWidth: 1,
+                    data: receber_pesos
+                },
+                {
+                    label: "Altura",
+                    backgroundColor: "#ff6384",
+                    borderColor: "#ff6384",
+                    hoverBackgroundColor: "#ff6384",
+                    hoverBorderColor: "#ff6384",
+                    borderWidth: 1,
+                    data: receber_alturas
+                },
+                {
+                    label: "IMC",
+                    backgroundColor: "#4caf50",
+                    borderColor: "#4caf50",
+                    hoverBackgroundColor: "#4caf50",
+                    hoverBorderColor: "#4caf50",
+                    borderWidth: 1,
+                    data: receber_imcs
+                }]
+            
+            };
 
-                var graficoBarra = new Chart(
-                    grafico_canva, {
-                        type: "bar",
-                        data: dados,
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    position: "top",
-                                },
+            var grafico_canva = $("#grafico");
+            var graficoBarra = new Chart(
+                grafico_canva, {
+                    type: "bar",
+                    data: dados,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: "top",
+                            },
+                            title: {
+                                display: true,
+                                text: "IMC - " + ano
+                            }
+                        },
+                        scales: {
+                            y: {
+                                display: true,
                                 title: {
                                     display: true,
-                                    text: "Contas a Receber - " + ano
+                                    text: "Valores",
+                                    color: "#000000",
+                                    font: {
+                                        weight: "bold",
+                                    }
                                 }
                             },
-                            scales: {
-                                y: {
+                            x: {
+                                display: true,
+                                title: {
                                     display: true,
-                                    title: {
-                                        display: true,
-                                        text: "Valores R$",
-                                        color: "#000000",
-                                        font: {
-                                            weight: "bold",
-                                        }
-                                    }
-                                },
-                                x: {
-                                    display: true,
-                                    title: {
-                                        display: true,
-                                        text: "Meses do ano",
-                                        color: "#000000",
-                                        font: {
-                                            weight: "bold",
-                                        }
+                                    text: "Meses do ano",
+                                    color: "#000000",
+                                    font: {
+                                        weight: "bold",
                                     }
                                 }
                             }
                         }
                     }
-                );
+                }
+            );
             },
       // Resto do código...
 
