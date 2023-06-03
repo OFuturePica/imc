@@ -152,6 +152,7 @@ try {
                                 <th>Peso</th>
                                 <th>Altura</th>
                                 <th>Data</th>
+                                <th>Imc</th> 
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -162,6 +163,7 @@ try {
                                     <td><?php echo number_format($medidas["peso"], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($medidas["altura"], 2, ',', '.'); ?></td>
                                     <td><?php echo  date("d/m/y", strtotime($medidas["data"])); ?></td>
+                                    <td><?php echo number_format($medidas["altura"] / ($medidas["altura"] * $medidas["altura"]), 2, ',', '.'); ?></td>
                                     <td>
                                         <a id="botao_view_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
                                         <a id="botao_editar_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>
