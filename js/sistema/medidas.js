@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	//configurando a tabela de dados listados
-	$("#lista_categoria").DataTable({
+	$("#lista_medidas").DataTable({
 		columnDefs: [{
 			targets: [2],
 			orderable: false
@@ -20,15 +20,15 @@ $(document).ready(function () {
 	});
 
 	//configurando validação dos dados digitados no cadastro/edição
-	$("#categoria_dados").validate({
+	$("#medidas_dados").validate({
 		rules: {
-			peso_categoria: {
+			peso_medidas: {
 				required: true
 			},
-			altura_categoria: {
+			altura_medidas: {
 				required: true
 			},
-			data_categoria: {
+			data_medidas: {
 				required: true
 			}
 		},
@@ -48,18 +48,18 @@ $(document).ready(function () {
 			}
 		},
 		messages: {
-			peso_categoria: {
+			peso_medidas: {
 				required: "Este campo não pode ser vazio!"
 			},
-			altura_categoria: {
+			altura_medidas: {
 				required: "Este campo não pode ser vazio!"
 			},
-			data_categoria: {
+			data_medidas: {
 				required: "Este campo não pode ser vazio!",
 			}
 		}
 	});
-		/*$("#altura_categoria").inputmask("currency", {
+		/*$("#altura_medidas").inputmask("currency", {
 		autoUnmask: true,
 		radixPoint: ",",
 		groupSeparator: ".",
@@ -70,7 +70,7 @@ $(document).ready(function () {
 		rightAlign: true,
 		unmaskAsNumber: false
 	});
-		$("#peso_categoria").inputmask("currency", {
+		$("#peso_medidas").inputmask("currency", {
 		autoUnmask: true,
 		radixPoint: ",",
 		groupSeparator: ".",
@@ -81,7 +81,7 @@ $(document).ready(function () {
 		rightAlign: true,
 		unmaskAsNumber: false
 	});*/
-$("#peso_categoria").inputmask("numeric", {
+$("#peso_medidas").inputmask("numeric", {
 	autoUnmask: true,
     radixPoint: ",",
     groupSeparator: ".",
@@ -92,7 +92,7 @@ $("#peso_categoria").inputmask("numeric", {
     rightAlign: true,
     unmaskAsNumber: false
 });
-$("#altura_categoria").inputmask("numeric", {
+$("#altura_medidas").inputmask("numeric", {
 	autoUnmask: true,
     radixPoint: ",",
     groupSeparator: "",
@@ -106,60 +106,60 @@ $("#altura_categoria").inputmask("numeric", {
 
 
 	//clicar no botão da div de erros e escondendo as mensagens de erros de validação da listagem
-	$("#div_mensagem_botao_categoria").click(function () {
-		$("#div_mensagem_categoria").hide();
+	$("#div_mensagem_botao_medidas").click(function () {
+		$("#div_mensagem_medidas").hide();
 	});
 
 	//clicar no botão da div de erros e escondendo as mensagens de erros de validação do registro
-	$("#div_mensagem_registro_botao_categoria").click(function () {
-		$("#div_mensagem_registro_categoria").hide();
+	$("#div_mensagem_registro_botao_medidas").click(function () {
+		$("#div_mensagem_registro_medidas").hide();
 	});
 
 	//voltando para a página inicial do menu do sistema
-	$("#home_index_categoria").click(function () {
+	$("#home_index_medidas").click(function () {
 		$(location).prop("href", "menu.php");
 	});
 
-	//voltando para a página de listagem de categoria na mesma página onde ocorreu a chamada
-	$("#categoria_index").click(function (e) {
+	//voltando para a página de listagem de medidas na mesma página onde ocorreu a chamada
+	$("#medidas_index").click(function (e) {
 		e.stopImmediatePropagation();
 
-		$("#conteudo").load("categoria_index.php", {
-			pagina_categoria: $("#pagina_categoria").val(),
-			texto_busca_categoria: $("#texto_busca_categoria").val()
+		$("#conteudo").load("medidas_index.php", {
+			pagina_medidas: $("#pagina_medidas").val(),
+			texto_busca_medidas: $("#texto_busca_medidas").val()
 		});
 	});
 
 	//botão limpar do cadastro de informações
-	$("#botao_limpar_categoria").click(function () {
+	$("#botao_limpar_medidas").click(function () {
 		$("#nome").focus();
-		$("#categoria_dados").each(function () {
+		$("#medidas_dados").each(function () {
 			$(this).find(":input").removeClass("is-invalid");
 			$(this).find(":input").removeAttr("value");
 		});
 	});
 
 	//botão salvar do cadastro de informações
-	$("#botao_salvar_categoria").click(function (e) {
-		$("#modal_salvar_categoria").modal("show");
+	$("#botao_salvar_medidas").click(function (e) {
+		$("#modal_salvar_medidas").modal("show");
 	});
 
 	//botão sim da pergunta de salvar as informações de cadastro
-	$("#modal_salvar_sim_categoria").click(function (e) {
+	$("#modal_salvar_sim_medidas").click(function (e) {
 		e.stopImmediatePropagation();
 
-		if (!$("#categoria_dados").valid()) {
-			$("#modal_salvar_categoria").modal("hide");
+		if (!$("#medidas_dados").valid()) {
+			$("#modal_salvar_medidas").modal("hide");
 			return;
 		}
 
-		var dados = $("#categoria_dados").serializeArray().reduce(function (vetor, obj) {
+		var dados = $("#medidas_dados").serializeArray().reduce(function (vetor, obj) {
 			vetor[obj.name] = obj.value;
 			return vetor;
 		}, {});
 		var operacao = null;
 
-		$("#carregando_categoria").removeClass("d-none");
+		$("#carregando_medidas").removeClass("d-none");
 
 		if ($.trim($("#id_medida").val()) != "") {
 			operacao = "editar";
@@ -171,209 +171,209 @@ $("#altura_categoria").inputmask("numeric", {
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "categoria_crud.php",
+			url: "medidas_crud.php",
 			data: {
 				acao: operacao,
 				registro: dados
 			},
 			dataType: "json",
 			success: function (e) {
-				$("#conteudo").load("categoria_index.php", {
-					pagina_categoria: $("#pagina_categoria").val(),
-					texto_busca_categoria: $("#texto_busca_categoria").val()
+				$("#conteudo").load("medidas_index.php", {
+					pagina_medidas: $("#pagina_medidas").val(),
+					texto_busca_medidas: $("#texto_busca_medidas").val()
 				}, function () {
-					$("#div_mensagem_texto_categoria").empty().append("Categoria cadastrada!");
-					$("#div_mensagem_categoria").show();
+					$("#div_mensagem_texto_medidas").empty().append("Categoria cadastrada!");
+					$("#div_mensagem_medidas").show();
 				});
 			},
 			error: function (e) {
-				$("#div_mensagem_registro_texto_categoria").empty().append(e.responseText);
-				$("#div_mensagem_registro_categoria").show();
+				$("#div_mensagem_registro_texto_medidas").empty().append(e.responseText);
+				$("#div_mensagem_registro_medidas").show();
 			},
 			complete: function () {
-				$("#modal_salvar_categoria").modal("hide");
-				$("#carregando_categoria").addClass("d-none");
+				$("#modal_salvar_medidas").modal("hide");
+				$("#carregando_medidas").addClass("d-none");
 			}
 		});
 	});
 
 	//botão adicionar da tela de listagem de registros
-	$("#botao_adicionar_categoria").click(function (e) {
+	$("#botao_adicionar_medidas").click(function (e) {
 		e.stopImmediatePropagation();
 
 		//levando os elementos para tela de consulta para depois realizar as buscas/pesquisas
-		var pagina = $("#pagina_categoria.btn.btn-primary.btn-sm").val();
-		var texto_busca = $("#texto_busca_categoria").val();
+		var pagina = $("#pagina_medidas.btn.btn-primary.btn-sm").val();
+		var texto_busca = $("#texto_busca_medidas").val();
 
-		$("#conteudo").load("categoria_add.php", function () {
-			$("#carregando_categoria").removeClass("d-none");
+		$("#conteudo").load("medidas_add.php", function () {
+			$("#carregando_medidas").removeClass("d-none");
 
 			$.ajax({
 				type: "POST",
 				cache: false,
-				url: "categoria_add.php",
+				url: "medidas_add.php",
 				data: {
-					pagina_categoria: pagina,
-					texto_busca_categoria: texto_busca
+					pagina_medidas: pagina,
+					texto_busca_medidas: texto_busca
 				},
 				dataType: "html",
 				success: function (e) {
 					$("#conteudo").empty().append(e);
 				},
 				error: function (e) {
-					$("#div_mensagem_texto_categoria").empty().append(e.responseText);
-					$("#div_mensagem_categoria").show();
+					$("#div_mensagem_texto_medidas").empty().append(e.responseText);
+					$("#div_mensagem_medidas").show();
 				},
 				complete: function () {
-					$("#carregando_categoria").addClass("d-none");
+					$("#carregando_medidas").addClass("d-none");
 				}
 			});
 		});
 	});
 
 	//botão pesquisar da tela de listagem de registros
-	$("#botao_pesquisar_categoria").click(function (e) {
+	$("#botao_pesquisar_medidas").click(function (e) {
 		e.stopImmediatePropagation();
 
-		$("#carregando_categoria").removeClass("d-none");
+		$("#carregando_medidas").removeClass("d-none");
 
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "categoria_index.php",
+			url: "medidas_index.php",
 			data: {
-				texto_busca_categoria: $("#texto_busca_categoria").val()
+				texto_busca_medidas: $("#texto_busca_medidas").val()
 			},
 			dataType: "html",
 			success: function (e) {
 				$("#conteudo").empty().append(e);
 			},
 			error: function (e) {
-				$("#div_mensagem_texto_categoria").empty().append(e.responseText);
-				$("#div_mensagem_categoria").show();
+				$("#div_mensagem_texto_medidas").empty().append(e.responseText);
+				$("#div_mensagem_medidas").show();
 			},
 			complete: function () {
-				$("#carregando_categoria").addClass("d-none");
+				$("#carregando_medidas").addClass("d-none");
 			}
 		});
 	});
 
 	//botão editar da tela de listagem de registros
-	$(document).on("click", "#botao_editar_categoria", function (e) {
+	$(document).on("click", "#botao_editar_medidas", function (e) {
 		e.stopImmediatePropagation();
 		//levando os elementos para tela de consulta para depois realizar as buscas/pesquisas
 		var id = $(this).attr("chave");
-		var pagina = $("#pagina_categoria.btn.btn-primary.btn-sm").val();
-		var texto_busca = $("#texto_busca_categoria").val();
+		var pagina = $("#pagina_medidas.btn.btn-primary.btn-sm").val();
+		var texto_busca = $("#texto_busca_medidas").val();
 
-		$("#conteudo").load("categoria_edit.php", function () {
-			$("#carregando_categoria").removeClass("d-none");
+		$("#conteudo").load("medidas_edit.php", function () {
+			$("#carregando_medidas").removeClass("d-none");
 
 			$.ajax({
 				type: "POST",
 				cache: false,
-				url: "categoria_edit.php",
+				url: "medidas_edit.php",
 				data: {
 					id_medida: id,
-					pagina_categoria: pagina,
-					texto_busca_categoria: texto_busca
+					pagina_medidas: pagina,
+					texto_busca_medidas: texto_busca
 				},
 				dataType: "html",
 				success: function (e) {
 					$("#conteudo").empty().append(e);
 				},
 				error: function (e) {
-					$("#div_mensagem_texto_categoria").empty().append(e.responseText);
-					$("#div_mensagem_categoria").show();
+					$("#div_mensagem_texto_medidas").empty().append(e.responseText);
+					$("#div_mensagem_medidas").show();
 				},
 				complete: function () {
-					$("#carregando_categoria").addClass("d-none");
+					$("#carregando_medidas").addClass("d-none");
 				}
 			});
 		});
 	});
 
 	//botão visualizar da tela de listagem de registros
-	$(document).on("click", "#botao_view_categoria", function (e) {
+	$(document).on("click", "#botao_view_medidas", function (e) {
 		e.stopImmediatePropagation();
 		//levando os elementos para tela de consulta para depois realizar as buscas/pesquisas
 		var id = $(this).attr("chave");
-		var pagina = $("#pagina_categoria.btn.btn-primary.btn-sm").val();
-		var texto_busca = $("#texto_busca_categoria").val();
+		var pagina = $("#pagina_medidas.btn.btn-primary.btn-sm").val();
+		var texto_busca = $("#texto_busca_medidas").val();
 
-		$("#conteudo").load("categoria_view.php", function () {
-			$("#carregando_categoria").removeClass("d-none");
+		$("#conteudo").load("medidas_view.php", function () {
+			$("#carregando_medidas").removeClass("d-none");
 
 			$.ajax({
 				type: "POST",
 				cache: false,
-				url: "categoria_view.php",
+				url: "medidas_view.php",
 				data: {
-					id_categoria: id,
-					pagina_categoria: pagina,
-					texto_busca_categoria: texto_busca
+					id_medidas: id,
+					pagina_medidas: pagina,
+					texto_busca_medidas: texto_busca
 				},
 				dataType: "html",
 				success: function (e) {
 					$("#conteudo").empty().append(e);
 				},
 				error: function (e) {
-					$("#div_mensagem_texto_categoria").empty().append(e.responseText);
-					$("#div_mensagem_categoria").show();
+					$("#div_mensagem_texto_medidas").empty().append(e.responseText);
+					$("#div_mensagem_medidas").show();
 				},
 				complete: function () {
-					$("#carregando_categoria").addClass("d-none");
+					$("#carregando_medidas").addClass("d-none");
 				}
 			});
 		});
 	});
 
 	//botão paginação da tela de listagem de registros
-	$(document).on("click", "#pagina_categoria", function (e) {
+	$(document).on("click", "#pagina_medidas", function (e) {
 		//Aqui como links de botões têm o mesmo nome é necessário parar as chamadas
 		e.stopImmediatePropagation();
 
-		var texto_busca = $("#texto_busca_categoria").val();
+		var texto_busca = $("#texto_busca_medidas").val();
 		var pagina = $(this).val();
-		$("#carregando_categoria").removeClass("d-none");
+		$("#carregando_medidas").removeClass("d-none");
 
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "categoria_index.php",
+			url: "medidas_index.php",
 			data: {
-				pagina_categoria: pagina,
-				texto_busca_categoria: texto_busca
+				pagina_medidas: pagina,
+				texto_busca_medidas: texto_busca
 			},
 			dataType: "html",
 			success: function (e) {
 				$("#conteudo").empty().append(e);
 			},
 			error: function (e) {
-				$("#div_mensagem_texto_categoria").empty().append(e.responseText);
-				$("#div_mensagem_categoria").show();
+				$("#div_mensagem_texto_medidas").empty().append(e.responseText);
+				$("#div_mensagem_medidas").show();
 			},
 			complete: function () {
-				$("#carregando_categoria").addClass("d-none");
-				$("#texto_busca_categoria").text(texto_busca);
+				$("#carregando_medidas").addClass("d-none");
+				$("#texto_busca_medidas").text(texto_busca);
 			}
 		});
 	});
 
 	//botão excluir da tela de listagem de registros
-	$(document).on("click", "#botao_excluir_categoria", function (e) {
+	$(document).on("click", "#botao_excluir_medidas", function (e) {
 		e.stopImmediatePropagation();
 
 		confirmaExclusao(this);
 	});
 
 	function confirmaExclusao(registro) {
-		$("#modal_excluir_categoria").modal("show");
-		$("#id_excluir_categoria").val($(registro).attr("chave"));
+		$("#modal_excluir_medidas").modal("show");
+		$("#id_excluir_medidas").val($(registro).attr("chave"));
 	}
 
 	//botão sim da pergunta de excluir de listagem de registros
-	$("#modal_excluir_sim_categoria").click(function () {
+	$("#modal_excluir_sim_medidas").click(function () {
 		excluirRegistro();
 	});
 
@@ -382,29 +382,29 @@ $("#altura_categoria").inputmask("numeric", {
 		var registro = new Object();
 		var registroJson = null;
 
-		registro.id = $("#id_excluir_categoria").val();
+		registro.id = $("#id_excluir_medidas").val();
 		registroJson = JSON.stringify(registro);
 
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "categoria_crud.php",
+			url: "medidas_crud.php",
 			data: {
 				acao: "excluir",
 				registro: registroJson
 			},
 			dataType: "json",
 			success: function () {
-				$("#div_mensagem_texto_categoria").empty().append("Categoria excluída!");
-				$("#div_mensagem_categoria").show();
-				$("tr#" + registro.id + "_categoria").remove();
+				$("#div_mensagem_texto_medidas").empty().append("Categoria excluída!");
+				$("#div_mensagem_medidas").show();
+				$("tr#" + registro.id + "_medidas").remove();
 			},
 			error: function (e) {
-				$("#div_mensagem_texto_categoria").empty().append(e.responseText);
-				$("#div_mensagem_categoria").show();
+				$("#div_mensagem_texto_medidas").empty().append(e.responseText);
+				$("#div_mensagem_medidas").show();
 			},
 			complete: function () {
-				$("#modal_excluir_categoria").modal("hide");
+				$("#modal_excluir_medidas").modal("hide");
 			}
 		});
 	}

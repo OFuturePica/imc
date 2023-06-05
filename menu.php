@@ -38,7 +38,7 @@ require_once("valida_acesso.php");
          <span class="nav_logo-name">imc-master</span>
         </a>
         <div class="nav_list">
-          <a href="#" class="nav_link" title="Categoria" id="categoria_link">
+          <a href="#" class="nav_link" title="Categoria" id="medidas_link">
           <i class="fas fa-plus fa-beat nav_icon"></i>
           <span class="nav_name">medidas</span>
           </a>

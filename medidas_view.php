@@ -7,9 +7,9 @@ require_once("conexao.php");
 if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     try {
         $erros = [];
-        $id = filter_input(INPUT_POST, "id_categoria", FILTER_VALIDATE_INT);
-        $pagina = filter_input(INPUT_POST, "pagina_categoria", FILTER_VALIDATE_INT);
-        $texto_busca = filter_input(INPUT_POST, "texto_busca_categoria", FILTER_SANITIZE_STRING);
+        $id = filter_input(INPUT_POST, "id_medidas", FILTER_VALIDATE_INT);
+        $pagina = filter_input(INPUT_POST, "pagina_medidas", FILTER_VALIDATE_INT);
+        $texto_busca = filter_input(INPUT_POST, "texto_busca_medidas", FILTER_SANITIZE_STRING);
 
         $sql = "select * from medidas where id = ?";
 
@@ -45,9 +45,9 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 <div class="col-md-4 d-flex justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_categoria"><i class="fas fa-home"></i>
+                            <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_medidas"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
-                            <li class="breadcrumb-item"><a href="#" title="Categoria" id="categoria_index"><i class="fas fa-plus fa-beat "></i> <span>Medidas</span></a></li>
+                            <li class="breadcrumb-item"><a href="#" title="Categoria" id="medidas_index"><i class="fas fa-plus fa-beat "></i> <span>Medidas</span></a></li>
                             <li class="breadcrumb-item active" aria-current="page">Visualizar</li>
                         </ol>
                     </nav>
@@ -69,15 +69,15 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
             <hr>
             <div class="card">
                 <div class="card-header">
-                    <ul class="nav nav-tabs" id="tab_categoria" role="tablist">
+                    <ul class="nav nav-tabs" id="tab_medidas" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="dadostab_categoria" data-bs-toggle="tab" data-bs-target="#dados_categoria" type="button" role="tab" aria-controls="dados_categoria" aria-selected="true">Dados</button>
+                            <button class="nav-link active" id="dadostab_medidas" data-bs-toggle="tab" data-bs-target="#dados_medidas" type="button" role="tab" aria-controls="dados_medidas" aria-selected="true">Dados</button>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
-                    <div class="tab-content" id="tabdados_categoria">
-                        <div class="tab-pane fade show active" id="dados_categoria" role="tabpanel" aria-labelledby="dados_categoria">
+                    <div class="tab-content" id="tabdados_medidas">
+                        <div class="tab-pane fade show active" id="dados_medidas" role="tabpanel" aria-labelledby="dados_medidas">
                            
                             <br>
                             <dl>
@@ -102,8 +102,8 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                     </div>
                 </div>
                 <div class="card-footer">
-                    <input type="hidden" id="pagina_categoria" name="pagina" value="<?php echo isset($pagina) ? $pagina : '' ?>" />
-                    <input type="hidden" id="texto_busca_categoria" name="texto_busca_categoria" value="<?php echo isset($texto_busca) ? $texto_busca : '' ?>" />
+                    <input type="hidden" id="pagina_medidas" name="pagina" value="<?php echo isset($pagina) ? $pagina : '' ?>" />
+                    <input type="hidden" id="texto_busca_medidas" name="texto_busca_medidas" value="<?php echo isset($texto_busca) ? $texto_busca : '' ?>" />
                 </div>
             </div>
         </div>
@@ -111,6 +111,6 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 </div>
 <script>
      //devido ao load precisa carregar o arquivo js dessa forma
-    var url = "./js/sistema/categoria.js";
+    var url = "./js/sistema/medidas.js";
     $.getScript(url);
 </script>

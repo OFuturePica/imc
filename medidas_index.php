@@ -18,11 +18,11 @@ try {
 
     // Verifica se é uma requisição POST para efetuar a pesquisa específica e preparar paginação
     if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
-        if (isset($_POST["texto_busca_categoria"])) {
-            $texto_busca = filter_input(INPUT_POST, "texto_busca_categoria", FILTER_SANITIZE_STRING);
+        if (isset($_POST["texto_busca_medidas"])) {
+            $texto_busca = filter_input(INPUT_POST, "texto_busca_medidas", FILTER_SANITIZE_STRING);
         }
-        if (isset($_POST["pagina_categoria"])) {
-            $pagina = filter_input(INPUT_POST, "pagina_categoria", FILTER_VALIDATE_INT);
+        if (isset($_POST["pagina_medidas"])) {
+            $pagina = filter_input(INPUT_POST, "pagina_medidas", FILTER_VALIDATE_INT);
             $inicio = ($pagina - 1) * REGISTROS_POR_PAGINA;
 
             if ($inicio < 0) {
@@ -52,9 +52,9 @@ try {
         if ($total_paginas > 1) {
             for ($i = 1; $i <= $total_paginas; $i++) {
                 if ($i == $pagina) {
-                    $barra_paginacao .= "<input type='button' name='pagina_categoria' id='pagina_categoria' value='" . $i . "' class='btn btn-primary btn-sm' />";
+                    $barra_paginacao .= "<input type='button' name='pagina_medidas' id='pagina_medidas' value='" . $i . "' class='btn btn-primary btn-sm' />";
                 } else {
-                    $barra_paginacao .= "<input type='button' name='pagina_categoria' id='pagina_categoria' value='" . $i . "' class='btn btn-secondary btn-sm' />";
+                    $barra_paginacao .= "<input type='button' name='pagina_medidas' id='pagina_medidas' value='" . $i . "' class='btn btn-secondary btn-sm' />";
                 }
             }
         }
@@ -79,7 +79,7 @@ try {
 <br>
 <div class="container">
     <div class="row">
-        <div id="carregando_categoria" class="d-none text-center">
+        <div id="carregando_medidas" class="d-none text-center">
             <img src="./imagens/carregando.gif" />
         </div>
         <div class="col-md-12">
@@ -92,7 +92,7 @@ try {
                 <div class="col-md-4 d-flex justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_categoria"><i class="fas fa-home"></i>
+                            <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_medidas"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
                             <li class="breadcrumb-item active" aria-current="page">Medidas</li>
                         </ol>
@@ -102,14 +102,14 @@ try {
             <hr>
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-start">
-                    <a href="#" class="btn btn-primary btn-sm" title="Adicionar" id="botao_adicionar_categoria"><i class="fas fa-plus-square"></i>&nbsp;Adicionar</a>&nbsp;
-                    <a href="categoria_pdf.php" class="btn btn-primary btn-sm" title="Imprimir" id="botao_imprimir_categoria" target="_blank"><i class="fas fa-print"></i>&nbsp;Imprimir</a>
+                    <a href="#" class="btn btn-primary btn-sm" title="Adicionar" id="botao_adicionar_medidas"><i class="fas fa-plus-square"></i>&nbsp;Adicionar</a>&nbsp;
+                    <a href="medidas_pdf.php" class="btn btn-primary btn-sm" title="Imprimir" id="botao_imprimir_medidas" target="_blank"><i class="fas fa-print"></i>&nbsp;Imprimir</a>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
-                    <input type="text" name="texto_busca" value="<?php echo $texto_busca; ?>" id="texto_busca_categoria" maxlength="25">
-                    <a id="botao_pesquisar_categoria" class="btn btn-primary btn-sm" title="Pesquisar"><i class="fas fa-search"></i>&nbsp;Pesquisar</a>
+                    <input type="text" name="texto_busca" value="<?php echo $texto_busca; ?>" id="texto_busca_medidas" maxlength="25">
+                    <a id="botao_pesquisar_medidas" class="btn btn-primary btn-sm" title="Pesquisar"><i class="fas fa-search"></i>&nbsp;Pesquisar</a>
                 </div>
             </div>
             <hr>
@@ -130,22 +130,22 @@ try {
             }
             unset($_SESSION["erros"]);
             ?>
-            <div class="alert alert-info alert-dismissible fade show" style="display: none;" id="div_mensagem_categoria">
-                <button type="button" class="btn-close btn-sm" aria-label="Close" id="div_mensagem_botao_categoria"></button>
-                <p id="div_mensagem_texto_categoria"></p>
+            <div class="alert alert-info alert-dismissible fade show" style="display: none;" id="div_mensagem_medidas">
+                <button type="button" class="btn-close btn-sm" aria-label="Close" id="div_mensagem_botao_medidas"></button>
+                <p id="div_mensagem_texto_medidas"></p>
             </div>
             <?php
             if (!count($medidas)) {
             ?>
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
-                    Nenhuma categoria encontrada!
+                    Nenhuma medidas encontrada!
                 </div>
             <?php
             } else {
             ?>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="lista_categoria">
+                    <table class="table table-striped table-hover" id="lista_medidas">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -163,11 +163,11 @@ try {
                                     <td><?php echo number_format($medidas["peso"], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($medidas["altura"], 2, ',', '.'); ?></td>
                                     <td><?php echo  date("d/m/y", strtotime($medidas["data"])); ?></td>
-                                    <td><?php echo number_format($medidas["altura"] / ($medidas["altura"] * $medidas["altura"]), 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($medidas["peso"] / ($medidas["altura"] * $medidas["altura"]), 2, ',', '.'); ?></td>
                                     <td>
-                                        <a id="botao_view_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
-                                        <a id="botao_editar_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>
-                                        <a id="botao_excluir_categoria" chave="<?php echo $medidas['id']; ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                                        <a id="botao_view_medidas" chave="<?php echo $medidas['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
+                                        <a id="botao_editar_medidas" chave="<?php echo $medidas['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a id="botao_excluir_medidas" chave="<?php echo $medidas['id']; ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
 
@@ -186,19 +186,19 @@ try {
 </div>
 
 <!--modal de excluir-->
-<div class="modal fade" id="modal_excluir_categoria" tabindex="-1" aria-labelledby="logoutlabel" aria-hidden="true">
+<div class="modal fade" id="modal_excluir_medidas" tabindex="-1" aria-labelledby="logoutlabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="logoutlabel_categoria">Pergunta</h5>
+                <h5 class="modal-title" id="logoutlabel_medidas">Pergunta</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Deseja excluir o registro?
-                <input type="hidden" id="id_excluir_categoria" value="" />
+                <input type="hidden" id="id_excluir_medidas" value="" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="modal_excluir_sim_categoria">Sim</button>
+                <button type="button" class="btn btn-primary" id="modal_excluir_sim_medidas">Sim</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
             </div>
         </div>
@@ -206,6 +206,6 @@ try {
 </div>
 <script>
      //devido ao load precisa carregar o arquivo js dessa forma
-    var url = "./js/sistema/categoria.js";
+    var url = "./js/sistema/medidas.js";
     $.getScript(url);
 </script>

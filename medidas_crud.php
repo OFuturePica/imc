@@ -3,7 +3,7 @@ require_once("valida_acesso.php");
 ?>
 <?php
 require_once("conexao.php");
-require_once("categoria_filtro.php");
+require_once("medidas_filtro.php");
 
 //operações via ajax
 if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
@@ -26,9 +26,9 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
-                    $registro->peso_categoria,
-                    $registro->altura_categoria,
-                    $registro->data_categoria,
+                    $registro->peso_medidas,
+                    $registro->altura_medidas,
+                    $registro->data_medidas,
                     $registro->usuario_id_medida
                 ));
                 print json_encode($conexao->lastInsertId());
@@ -62,9 +62,9 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
-                    $registro->peso_categoria,
-                    $registro->altura_categoria,
-                    $registro->data_categoria,
+                    $registro->peso_medidas,
+                    $registro->altura_medidas,
+                    $registro->data_medidas,
                     $registro->id_medida,
                     $registro->usuario_id_medida
                   
@@ -150,7 +150,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 
         $sql = "select extract(month from data) as mes, peso  as peso,  altura as altura,  truncate((peso / (altura * altura)),2) as valor " . "from medidas where usuario_id = ? " .
             "and extract(year from data) = ? " .
-            "group by mes order by mes";
+            "order by mes,  peso";
 
         $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
         $pre = $conexao->prepare($sql);
@@ -165,7 +165,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
         for ($i = 0; $i < count($receber); $i++) {
             $linha = $receber[$i];
             if (array_key_exists($linha["mes"], $meses)) {
-            $linhas[$meses[$linha["mes"]]] = [[$linha["peso"] , $linha["altura"]]];
+            $linhas[$meses[$linha["mes"]]] = [[$linha["valor"]]];
                 
             }
         }

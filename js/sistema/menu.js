@@ -15,7 +15,7 @@ $(document).ready(function() {
     $.ajax({
         type: "POST",
         cache: false,
-        url: "categoria_crud.php",
+        url: "medidas_crud.php",
         data: {
             acao: "grafico",
             ano: ano,
@@ -77,7 +77,7 @@ $(document).ready(function() {
             var grafico_canva = $("#grafico");
             var graficoBarra = new Chart(
                 grafico_canva, {
-                    type: "bar",
+                    type: "line",
                     data: dados,
                     options: {
                         responsive: true,
@@ -138,8 +138,8 @@ $(document).ready(function() {
         $(location).prop("href", "menu.php");
     });
 
-    $("#categoria_link").click(function (e) {
-        $("#conteudo").load("categoria_index.php");
+    $("#medidas_link").click(function (e) {
+        $("#conteudo").load("medidas_index.php");
     });
 
     $("#contareceber_link").click(function (e) {
