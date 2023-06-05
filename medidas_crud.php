@@ -152,6 +152,11 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
             "and extract(year from data) = ? " .
             "order by mes,  peso";
 
+            /**"select DATE(data) as data, peso, altura, truncate((peso / (altura * altura)), 2) as valor" . "FROM medidas WHERE usuario_id = ?" .
+    "and year(data) = ? " .
+    "order by data, peso";
+    */
+
         $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
         $pre = $conexao->prepare($sql);
         $pre->execute(array(
@@ -180,6 +185,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 }
             }
         }
+        
 
         $retorno[] = $receber_aux;
         print json_encode($retorno);
