@@ -1,7 +1,7 @@
  
 <?php
 require_once("./fpdf184/fpdf.php");
-require_once("categoria_crud.php");
+require_once("medidas_crud.php");
 
 class CategoriaPDF extends FPDF
 {
@@ -40,7 +40,7 @@ class CategoriaPDF extends FPDF
     function listagem()
     {
         try {
-            $cabecalho = ["ID", "Peso", "Altura", "Data de Medidas"];
+            $cabecalho = ["ID", "Peso", "Altura", "imc","Data de Medidas"];
             $dados = listarCategoria();
 
             // Cabeçalho
@@ -53,6 +53,7 @@ class CategoriaPDF extends FPDF
                 $this->Cell(40, 6, $linha['id'], 1);
                 $this->Cell(40, 6, $linha['peso'], 1);
                 $this->Cell(40, 6, $linha['altura'], 1);
+                $this->Cell(40, 6, $linha['peso'] / ($linha['altura'] * $linha['peso']) , 1);
                 $this->Cell(40, 6, $linha['data'], 1);
                 $this->Ln();
             }

@@ -27,12 +27,12 @@
     
                 $.each(entrada, function (i, item) {
                     entrada_meses.push(i);
-                    entrada_valores.push(parseFloat(item).toFixed(2));
+                    entrada_valores.push(item);
                 });
     
                 $.each(saida, function (i, item) {
                     saida_meses.push(i);
-                    saida_valores.push(parseFloat(item).toFixed(2));
+                    saida_valores.push(item);
                 });
     
                 var dados = {

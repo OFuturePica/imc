@@ -25,59 +25,43 @@ $(document).ready(function() {
         success: function (data) {
             var receber = [];
             var receber_meses = [];
-            var receber_pesos = [];
-            var receber_alturas = [];
-            var receber_imcs = [];
+            var receber_valores = [];
+           
+            
 
             $.each(data, function (i, item) {
-                if (i == 0) {
+                if (i == 0 ) {
                     receber = item;
                 }
+
             });
 
             $.each(receber, function (i, item) {
                 receber_meses.push(i);
-                receber_pesos.push(item[0]);
-                receber_alturas.push(item[1]);
-                receber_imcs.push((item[0]/(item[1]*item[1])));
+                receber_valores.push(item[0]);
+               
             });
 
         var dados = {
                 labels: receber_meses,
                 datasets: [{
-                    label: "Peso",
+                    label: "imc",
                     backgroundColor: "#4080bf",
                     borderColor: "#3973ac",
                     hoverBackgroundColor: "#ccccff",
                     hoverBorderColor: "#b3b3ff",
                     borderWidth: 1,
-                    data: receber_pesos
+                    data: receber_valores
                 },
-                {
-                    label: "Altura",
-                    backgroundColor: "#ff6384",
-                    borderColor: "#ff6384",
-                    hoverBackgroundColor: "#ff6384",
-                    hoverBorderColor: "#ff6384",
-                    borderWidth: 1,
-                    data: receber_alturas
-                },
-                {
-                    label: "IMC",
-                    backgroundColor: "#4caf50",
-                    borderColor: "#4caf50",
-                    hoverBackgroundColor: "#4caf50",
-                    hoverBorderColor: "#4caf50",
-                    borderWidth: 1,
-                    data: receber_imcs
-                }]
+               
+              ]
             
             };
 
             var grafico_canva = $("#grafico");
             var graficoBarra = new Chart(
                 grafico_canva, {
-                    type: "line",
+                    type: "bar",
                     data: dados,
                     options: {
                         responsive: true,
