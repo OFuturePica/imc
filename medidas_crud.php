@@ -97,9 +97,9 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 
                 print json_encode(1);
             } catch (Exception $e) {
-            
-                
+               
                 echo "Erro: " . $e->getMessage() . "<br>";
+                
             } finally {
                 $conexao = null;
             }
