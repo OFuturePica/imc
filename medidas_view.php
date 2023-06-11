@@ -87,17 +87,24 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                                 </dd>
                             </dl>
                             <dl>
-                                <dt>peso</dt>
+                                <dt>Peso</dt>
                                 <dd>
                                     <?= isset($resultado["peso"]) ? $resultado["peso"] : ""; ?>
                                 </dd>
                             </dl>
                               <dl>
-                                <dt>altura</dt>
+                                <dt>Altura</dt>
                                 <dd>
                                     <?= isset($resultado["altura"]) ? $resultado["altura"] : ""; ?>
                                 </dd>
                             </dl>
+                          <dt>Imc</dt>
+<dd>
+    <?= isset($resultado["altura"], $resultado["peso"]) ? ($resultado["peso"] / ($resultado["altura"] * $resultado["altura"])) : ""; ?>
+
+</dd>
+</dl>
+
                         </div>
                     </div>
                 </div>
