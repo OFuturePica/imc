@@ -53,7 +53,7 @@ class CategoriaPDF extends FPDF
                 $this->Cell(40, 6, $linha['id'], 1);
                 $this->Cell(40, 6, $linha['peso'], 1);
                 $this->Cell(40, 6, $linha['altura'], 1);
-                $this->Cell(40, 6, $linha['peso'] / ($linha['altura'] * $linha['peso']) , 1);
+                $this->Cell(40, 6, $linha['peso'] / ($linha['altura'] * $linha['altura']) , 1);
                 $this->Cell(40, 6, $linha['data'], 1);
                 $this->Ln();
             }

@@ -27,17 +27,19 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
         }
         $dados["login"] = $login;
 
-        $senha = filter_input(INPUT_POST, "senha", FILTER_SANITIZE_STRING);
+      $senha = filter_input(INPUT_POST, "senha", FILTER_SANITIZE_STRING);
         if (!$senha) {
             $erros["senha"] =  "Senha: Campo vazio e ou informação inválida!";
+        } elseif (strlen($senha) < 6) {
+            $erros["senha"] =  "Senha: Deve ter pelo menos 6 caracteres!";
         }
         $dados["senha"] = $senha;
         $_SESSION["dados"] = $dados;
 
         if (count($erros) > 0) {
             throw new Exception("Erro nas informações!");
-        }
-
+        } 
+        
         $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
 
         //validando o login

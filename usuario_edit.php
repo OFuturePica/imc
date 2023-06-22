@@ -8,6 +8,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
     try {
         $erros = [];
         $id = filter_input(INPUT_POST, "id_usuario", FILTER_VALIDATE_INT);
+         $usuario_id = isset($_SESSION["usuario_id"]) ?  $_SESSION["usuario_id"] : 0;
         $pagina = filter_input(INPUT_POST, "pagina_usuario", FILTER_VALIDATE_INT);
         $texto_busca = filter_input(INPUT_POST, "texto_busca_usuario", FILTER_SANITIZE_STRING);
 
@@ -98,10 +99,15 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                                 <input type="text" class="form-control" id="login_usuario" name="login_usuario" maxlength="15" value="<?php echo isset($resultado['login']) ? $resultado['login'] : ''; ?>">
                             </div>
                             <div class="col-md-6">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="nova_senha" name="nova_senha" maxlength="10" value="<?php echo isset($resultado['senha']) ? $resultado['senha'] : ''; ?>">
+                                <label for="senhaatu" class="form-label">Senha Atual</label>
+                                <input type="password" class="form-control" id="atual_senha" name="atual_senha" maxlength="10" value="<?php echo isset($resultado['']) ? $resultado[''] : ''; ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="senha" class="form-label">Nova Senha</label>
+                                <input type="password" class="form-control" id="nova_senha" name="nova_senha" maxlength="10" value="<?php echo isset($resultado['']) ? $resultado[''] : ''; ?>">
                             </div>
                             <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo isset($id) ? $id : '' ?>" />
+                            <input type="hidden" id="usuario_id_usuario" name="usuario_id_usuario" value="<?php echo isset($usuario_id) ? $usuario_id : '' ?>" />
                         </div>
                     </div>
                     <br>
