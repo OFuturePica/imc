@@ -19,6 +19,6 @@
 
 :heavy_check_mark: Editar o perfil da loja
 
-| [<img src="https://avatars.githubusercontent.com/u/116108866?v=4" width=115><br><sub>Julian Alves</sub>](https://github.com/JulianAlves006) |  [<img src="https://avatars.githubusercontent.com/u/116108818?v=4" width=115><br><sub>Niucollas Cauã  Todt</sub>](https://github.com/OFuturePica) |
+| [<img src="https://avatars.githubusercontent.com/u/116108835?v=4" width=115><br><sub>Kaue Marlon Pavanello</sub>](https://github.com/0vidas) |  [<img src="https://avatars.githubusercontent.com/u/116108818?v=4" width=115><br><sub>Niucollas Cauã Todt</sub>](https://github.com/OFuturePica) |
 | :---: | :---:  
 
