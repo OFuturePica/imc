@@ -58,6 +58,6 @@ para trabalhos futuros falta  melhorar  e ajustar.
 
 ## Desenvolvedores/Contribuintes 
 
-| [<img src="https://avatars.githubusercontent.com/u/116108835?v=4" width=115><br><sub>Kaue Marlon Pavanello</sub>](https://github.com/0vidas) |  [<img src="https://avatars.githubusercontent.com/u/116108818?v=4" width=115><br><sub>Niucollas Cauã Todt</sub>](https://github.com/OFuturePica) |
+| [<img src="https://avatars.githubusercontent.com/u/116108835?v=4" width=115><br><sub>Kaue Marlon Pavanello</sub>](https://github.com/0vidas) |  [<img src="https://avatars.githubusercontent.com/u/116108818?v=4" width=115><br><sub>Nicollas Cauã Todt</sub>](https://github.com/OFuturePica) |
 | :---: | :---:  
 
